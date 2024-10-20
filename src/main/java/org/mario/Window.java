@@ -6,6 +6,7 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
+import java.util.Objects;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -15,17 +16,15 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public class Window {
 
-    private int width, height;
-    private String title;
     private long glfwWindow;
 
         // The window handle
         private static Window window = null;
 
         private Window() {
-            this.width = 1920;
-            this.height = 1080;
-            this.title = "Mario";
+            int width = 1920;
+            int height = 1080;
+            String title = "Mario";
         }
 
         public static Window get() {
@@ -47,7 +46,7 @@ public class Window {
 
             // Terminate GLFW and free the error callback
             glfwTerminate();
-            glfwSetErrorCallback(null).free();
+            Objects.requireNonNull(glfwSetErrorCallback(null)).free();
         }
 
         private void init() {
